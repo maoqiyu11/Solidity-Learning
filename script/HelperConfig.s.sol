@@ -18,6 +18,8 @@ contract HelperConfig is Script {
             activeNetworkConfig = getSepoliaEthConfig();
         } else if (block.chainid == 1) {
             activeNetworkConfig = getMainnetEthConfig();
+        } else if (block.chainid == 300) {
+            activeNetworkConfig = getZkSyncSepoliaConfig();
         } else {
             activeNetworkConfig = getOrCreatAnvilEthConfig();
         }
@@ -35,6 +37,17 @@ contract HelperConfig is Script {
             priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
         });
         return ethConfig;
+    }
+
+    function getZkSyncSepoliaConfig()
+        public
+        pure
+        returns (NetworkConfig memory)
+    {
+        NetworkConfig memory zkSyncConfig = NetworkConfig({
+            priceFeed: 0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF
+        });
+        return zkSyncConfig;
     }
 
     function getOrCreatAnvilEthConfig() public returns (NetworkConfig memory) {
